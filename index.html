@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <title>JS on Objects and Nested Objects</title>
+        <!-- HTML5 shim for IE8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+      <script src=“https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js”></script>
+    <![endif]-->
+
+</head>
+<body>
+<!-- Header -->
+<header>
+<h1> Student Details  </h1>
+</header>
+<!-- main section -->
+<main id="mainSection">
+<section id="subSection">
+<p id="demo"></p>
+</section>
+</main>
+<!-- javascript starts here in body section -->
+<script type="text/javascript">
+//declaring the student object with nested object
+var StudentDetails={
+	StudentName:"Raghavan",
+	DOB:"31-07-1990",
+	Skills:"MainFrames",
+	Address:{
+		State:"Karnataka",
+		City:"Bengaluru",
+		Country:"India",
+		Pin: 560100
+		}
+	};
+	//global variables
+var value=" ";
+var keyname=" ";
+var finalDetails=" ";
+var Klist=0;
+var Alist=0;
+var Plist=0;
+var Slist=0;
+//fucntion to display studentdetails object
+function dispStudDetails(){
+var temp1=0;
+var temp2=0;
+var arr = Object.keys(StudentDetails);
+//console.log(arr.length);
+var arr1= Object.keys(StudentDetails.Address);
+//console.log(arr1.length);
+if (temp1==0)
+{
+document.write("<b>Student Details</b><br>");
+temp1=1;
+}
+for(Klist=0;Klist<arr.length;Klist++)
+{
+	for(Slist in StudentDetails)
+	{
+		if (arr[Klist]==Slist)
+		{
+			if (Slist=="Address")
+			{
+				for(Alist=0;Alist<arr1.length;Alist++)
+				{
+					for(Plist in StudentDetails.Address)
+					{
+						if(arr1[Alist]==Plist)
+						{	
+							if (temp2==0)
+							{
+								document.write("Address<br>");
+								temp2=1;
+							}	
+							keyname=arr1[Alist];
+							value=StudentDetails.Address[Plist];
+							//console.log(keyname+" : "+value);
+							document.write("        "+keyname+" : "+value+"<br>");
+						}
+					}
+				}
+			}
+			else
+			{
+				keyname =arr[Klist];
+				value =StudentDetails[Slist];
+				//console.log(keyname+" :"+value);
+				document.write("    "+keyname+" : "+value+"<br>");
+			}	
+		}
+	}
+}
+}
+document.write("<u>Student Details are:</u><br><br>");
+dispStudDetails();
+// Adding additional properties
+StudentDetails.eyecolor="Black";
+StudentDetails["Mother_Name"]="Booma";
+document.write("<br><u>Student Details after Addition of Eye color and Mother name properties</u><br><br>");
+dispStudDetails();
+// deleting existing properties
+delete StudentDetails.DOB;
+document.write("<br><u> Student details after Deleting the DOB property</u><br><br>");
+dispStudDetails();
+</script>
+
+</body>
+</html>
